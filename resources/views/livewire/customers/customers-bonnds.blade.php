@@ -146,7 +146,6 @@
                                             </div>
                                         </div>
                                     </div> 
-                                    <a class="text-primary hover:text-sky-700" href="#" style="font-size: larger; font-weight: bolder" wire:click="delete({{$customersBond->id }})">تعديل</a>
                                 </td>
                             </tr>
                             @endforeach

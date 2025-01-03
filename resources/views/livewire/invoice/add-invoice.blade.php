@@ -48,7 +48,7 @@
                 <div class="grid md:grid-cols-4 gap-3 mb-6 w-full">
                     <div>
                         <label class="text-gray-800 text-sm font-medium mb-2 block">المبلغ المدفوع</label>
-                        <input type="number" class="form-input" wire:model="payedAmount">
+                        <input type="number" class="form-input" wire:model="payedAmount" placeholder="{{ $payedAmount }}">
                     </div>
                     <div>
                         <label class="text-gray-800 text-sm font-medium mb-2 block">ملاحظات</label>
@@ -290,6 +290,14 @@
                 id="redirectButton"
                 class="inline-flex items-center rounded-md border border-transparent bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none">
                 طباعة وحفظ الفاتورة
+            </button>
+            <button
+                style="cursor: pointer;"
+                wire:click="totalyPaid"
+                type="button"
+                id="redirectButton"
+                class="inline-flex items-center rounded-md border border-transparent bg-gray-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-500 focus:outline-none">
+                الفاتورة مدفوعة بالكامل
             </button>
             @else
             <p class="text-gray-500 " style="font-size: 20px;">اضف عميل ومنتجات لحفظ الفاتورة</p>
