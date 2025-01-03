@@ -12,7 +12,7 @@ class Login extends Component
     public function login()
     {
         if(auth()->attempt(['name' => $this->name , 'password' => $this->password])) {
-            return redirect()->route('addProduct');
+            return redirect()->route('addInvoice');
         }
         else{
             return redirect()->route('login');
