@@ -208,6 +208,12 @@ return str_replace(range(0, 9), $arabicDigits, $number);
         <span style="margin: 0 20px; flex: 1;"></span>
         <span style="text-align: right; flex: 1; width: 100%;">حساب قديم</span>
     </div>
+    @else
+    <div style="display: flex; justify-content: space-between; align-items: center; margin: 2px 0;">
+        <span style="text-align: left; flex: 1;"> - {{ convertToArabicDigits(abs($invoice->customer->balance + $invoice->total - $invoice->payedAmount)) }}</span>
+        <span style="margin: 0 20px; flex: 1;"></span>
+        <span style="text-align: right; flex: 1; width: 100%;">حساب قديم</span>
+    </div>
     @endif
     @if ($invoice->discount)
     <div style=" width: 100%;">
