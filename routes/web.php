@@ -15,18 +15,12 @@ use PHPUnit\Framework\Attributes\Group;
 */
 // make midllware for auth and make it group
 
-Route::middleware(['auth'])->group(function () {
 
-    
     Route::view('/addCategory', 'category.addCategory')->name('addCategory');
     
     Route::view('/addProduct', 'product.addProduct')->name('addProduct');
     Route::view('/products', 'product.products')->name('products');
     Route::view('/editProduct/{id}', 'product.editproduct')->name('editProduct');
-    
-
-
-
     
     Route::view('/addWorker', 'workers.addWorker')->name('addWorker');
     Route::view('/workers', 'workers.workers')->name('workers');
@@ -65,6 +59,8 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/sellers', 'money.sellers')->name('sellers');
     Route::view('/admin', 'admin.admin')->name('admin');
     // Route::view('/', 'index')->name('index');
+Route::middleware(['auth'])->group(function () {
+
 
 
 });
