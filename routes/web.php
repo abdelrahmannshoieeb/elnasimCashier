@@ -16,6 +16,8 @@ use PHPUnit\Framework\Attributes\Group;
 // make midllware for auth and make it group
 
 Route::middleware(['auth'])->group(function () {
+
+    
     Route::view('/addCategory', 'category.addCategory')->name('addCategory');
     
     Route::view('/addProduct', 'product.addProduct')->name('addProduct');
