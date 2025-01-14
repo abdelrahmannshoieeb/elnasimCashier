@@ -128,12 +128,21 @@ return str_replace(range(0, 9), $arabicDigits, $number);
 
     <div>
         <div style="display: flex; justify-content: space-between; align-items: center; font-weight: bold; margin: 2px 0;">
-            <span style="text-align: left; flex: 1;">{{ convertToArabicDigits($CustomerBonnd->value + $CustomerBonnd->customer->balance) }}</span>
+            <span style="text-align: left; flex: 1;">{{ convertToArabicDigits( $CustomerBonnd->customer->balance - $CustomerBonnd->value) }}</span>
             <span style="margin: 0 20px; flex: 1;"></span>
             <span style="text-align: right; flex: 1;">حساب قديم</span>
         </div>
     </div>
 
+    @if ($CustomerBonnd->type === 'add')
+    <div>
+        <div style="display: flex; justify-content: space-between; align-items: center; font-weight: bold; margin: 2px 0;">
+            <span style="text-align: left; flex: 1;">{{ convertToArabicDigits($CustomerBonnd->value) }}</span>
+            <span style="margin: 0 20px; flex: 1;"></span>
+            <span style="text-align: right; flex: 1;">اضافة نقدي </span>
+        </div>
+    </div>
+    @else
     <div>
         <div style="display: flex; justify-content: space-between; align-items: center; font-weight: bold; margin: 2px 0;">
             <span style="text-align: left; flex: 1;">{{ convertToArabicDigits($CustomerBonnd->value) }}</span>
@@ -141,6 +150,7 @@ return str_replace(range(0, 9), $arabicDigits, $number);
             <span style="text-align: right; flex: 1;">تنزيل نقدي</span>
         </div>
     </div>
+    @endif
 
     @if ($CustomerBonnd->customer->balance > 0)
     <div>

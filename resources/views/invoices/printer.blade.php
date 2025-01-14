@@ -163,7 +163,7 @@ return str_replace(range(0, 9), $arabicDigits, $number);
                     <td style="border: 2px dashed black; padding: 5px;" class="text-center">
                         {{ convertToArabicDigits($invoice->items->sum('qty')) }}
                     </td>
-                    <td colspan="2" style=" text-align: right; border: 2px dashed black; padding: 5px;">فاتورة اليوم</td>
+                    <td colspan="2" style=" text-align: right; border: 2px dashed black; padding: 5px;">الاجمالي </td>
                 </tr>
             </tfoot>
         </table>
@@ -223,7 +223,7 @@ return str_replace(range(0, 9), $arabicDigits, $number);
         <div style="display: flex; justify-content: space-between; align-items: center;  margin: 2px 0;">
             <span style="text-align: left; flex: 1;">{{ convertToArabicDigits($invoice->total) }}</span>
             <span style="margin: 0 10px; flex: 1;"></span>
-            <span style="text-align: right; flex: 1;">الاجمالي</span>
+            <span style="text-align: right; flex: 1;">فاتورة اليوم</span>
         </div>
     </div>
 
