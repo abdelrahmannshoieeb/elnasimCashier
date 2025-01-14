@@ -266,9 +266,18 @@ class AddInvoice extends Component
             $this->still = $this->total - $this->payedAmount;
         } elseif ($this->payedAmount == $this->total) {
             $this->status = 'paid';
-        } else {
+        } 
+        elseif ($this->payedAmount > $this->total) {
+            $this->status = 'paid';
+        }
+        else {
             $this->status = 'unpaid';
             $this->still = $this->total;
+        }
+        if ($this->customerType === 'attached' && $this->payedAmount > $this->total) {
+            $customer = Customer::find($this->selectedCustomerId);
+            $customer->balance = $customer->balance +  $this->payedAmount - $this->total ;
+            $customer->save();
         }
 
 
