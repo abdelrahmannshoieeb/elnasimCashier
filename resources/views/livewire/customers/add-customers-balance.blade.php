@@ -64,9 +64,9 @@
                         <label for="select-label" class="mb-2 block" style="font-weight:600;">طريقة تنفيذ العملية</label>
                         <select id="select-label" class="form-select" wire:model="method">
                             <option>اختر الطريقة</option>
-                            <option value="cash">كاش</option>
-                            <option value="credit"> بطاقة</option>
-                            <option value="cheque">شيك</option>
+                            <option value="cash">نقدي</option>
+                            <option value="credit"> اجل</option>
+                            <option value="cheque">دفعات</option>
                         </select>
                     </div>
 
