@@ -23,13 +23,7 @@
           </div>
       </a>
 
-      <!-- Topbar Search Modal Button -->
-      <button type="button" data-fc-type="modal" data-fc-target="topbar-search-modal" class="nav-link p-2 me-auto">
-          <span class="sr-only">Search</span>
-          <span class="flex items-center justify-center h-6 w-6">
-              <i class="mgc_search_line text-2xl"></i>
-          </span>
-      </button>
+   
 
       <!-- Fullscreen Toggle Button -->
       <div class="md:flex hidden">
