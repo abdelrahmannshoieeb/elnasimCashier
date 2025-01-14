@@ -1,0 +1,39 @@
+# Directories and files to ignore
+
+# Laravel-specific files and directories
+/vendor/
+!composer.lock
+/node_modules/
+/public/storage
+/storage/*.key
+/storage/framework/*
+/storage/logs/*
+/storage/debugbar/*
+
+# Ignore compiled files and cache
+.env
+.env.*.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+/.vagrant
+
+# Ignore IDE and OS-specific files
+.idea/
+*.phpstorm.meta.php
+.phpunit.result.cache
+.DS_Store
+Thumbs.db
+
+# Deployment scripts and logs
+/deploy.sh
+*.log
+
+# Keep lock files for dependency consistency
+!composer.lock
+!package-lock.json
+!yarn.lock
+
+# Static analysis tools cache
+/.php-cs-fixer.cache
+/.phpstan/cache/
