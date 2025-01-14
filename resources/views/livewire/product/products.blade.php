@@ -78,7 +78,6 @@
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase   text-center" style="font-size: larger; font-weight: bolder"> الفئة التابع لها</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase   text-center" style="font-size: larger; font-weight: bolder"> الحالة</th>
                             <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase   text-center" style="font-size: larger; font-weight: bolder">عمليات</th>
-                            <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase   text-center" style="font-size: larger; font-weight: bolder">اضف للمخزون</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -171,7 +170,6 @@
                             </td>
                             <td>
                                 <!-- Button to Open Modal for Adding to Stock -->
-                                <button type="button" class="text-danger hover:text-sky-700 mt-5" data-fc-target="default-moda-{{ $product->id }}" data-fc-type="modal" style="font-size: larger; font-weight: bolder;">اضف للمخزون</button><br>
 
                                 <!-- Modal for Adding to Stock (Dynamic for each product) -->
                                 <div id="default-moda-{{ $product->id }}" class="w-full h-full mt-5 fixed top-0 left-0 z-50 transition-all duration-500 fc-modal hidden">
