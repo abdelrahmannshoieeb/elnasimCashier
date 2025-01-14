@@ -22,6 +22,10 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/products', 'product.products')->name('products');
     Route::view('/editProduct/{id}', 'product.editproduct')->name('editProduct');
     
+
+
+
+    
     Route::view('/addWorker', 'workers.addWorker')->name('addWorker');
     Route::view('/workers', 'workers.workers')->name('workers');
     Route::view('/editWorker/{id}', 'workers.editWorker')->name('editWorker');
