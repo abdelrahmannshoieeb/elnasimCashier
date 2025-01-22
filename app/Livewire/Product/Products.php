@@ -21,7 +21,7 @@ class Products extends Component
 
     public function mount()
     {
-        $this->products = Product::all();
+        $this->products = Product::all()->reverse();
         $this->categories = Category::all();
     }
     public function delete($id)
@@ -32,7 +32,7 @@ class Products extends Component
             $product->delete();  // Delete the category
         }
 
-        $this->products = Product::all();
+        $this->products = Product::all()->reverse();
     }
 
     public function thesearch()
@@ -47,7 +47,7 @@ class Products extends Component
             $product->isActive = !$product->isActive; // Toggle the status
             $product->save();
         }
-        $this->products = Product::all();
+        $this->products = Product::all()->reverse();
     }
 
 

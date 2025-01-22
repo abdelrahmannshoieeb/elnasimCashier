@@ -115,7 +115,7 @@ return str_replace(range(0, 9), $arabicDigits, $number);
     </div>
 
     <div class="invoice-header" style="text-align: right; font-weight: bold; width: 100%;">
-        <span>اسم الكاشير:  عبد الرحمن</span>
+        <span>اسم الكاشير:  {{ $user->name }} </span>
     </div>
 
     <div class="invoice-items " style="display:flex; width: 100%; flex-direction: column; justify-content: center;">

@@ -12,7 +12,7 @@ class Suppliers extends Component
 
     public function mount()
     {
-        $this->suppliers = Supplier::all();
+        $this->suppliers = Supplier::all()->reverse();
     }
     public function delete($id)
     {
@@ -23,7 +23,7 @@ class Suppliers extends Component
             $user->delete();  
         }
     
-        $this->suppliers = Supplier::all();
+        $this->suppliers = Supplier::all()->reverse();
     }
 
     public function updatedSearch()
@@ -33,7 +33,7 @@ class Suppliers extends Component
 
     public function viewAll() {
 
-        $this->suppliers = Supplier::all();
+        $this->suppliers = Supplier::all()->reverse();
     }
 
     public function forhim() {

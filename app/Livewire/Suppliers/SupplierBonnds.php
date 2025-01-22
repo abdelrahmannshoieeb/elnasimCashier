@@ -12,7 +12,7 @@ class SupplierBonnds extends Component
 
     public function mount()
     {
-        $this->SupplierBonds = SupplierBond::all();
+        $this->SupplierBonds = SupplierBond::all()->reverse();
     }
     public function delete($id)
     {
@@ -22,7 +22,7 @@ class SupplierBonnds extends Component
             $user->delete();  // Delete the category
         }
     
-        $this->SupplierBonds = SupplierBond::all();
+        $this->SupplierBonds = SupplierBond::all()->reverse();
     }
 
     public function thesearch()
@@ -36,7 +36,7 @@ class SupplierBonnds extends Component
 
     public function viewAll() {
 
-        $this->SupplierBonds = SupplierBond::all();
+        $this->SupplierBonds = SupplierBond::all()->reverse();
     }
 
     public function forhim() {
@@ -46,7 +46,7 @@ class SupplierBonnds extends Component
         $this->SupplierBonds = SupplierBond::where('type', 'subtract')->get();
     }
     public function empty() {
-        $this->SupplierBonds = SupplierBond::all();
+        $this->SupplierBonds = SupplierBond::all()->reverse();
     }
 
 

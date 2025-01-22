@@ -60,12 +60,6 @@
                 </a>
             </li>
             <li class="menu-item">
-                <a href="{{ route('invoiceRefunded')}}" class="menu-link">
-                    <span class="menu-icon"><i class="mgc_coupon_line"></i></span>
-                    <span class="menu-text font-bold">   الفواتير المرتجعة </span>
-                </a>
-            </li>
-            <li class="menu-item">
                 <a href="{{ route('earning')}}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_coupon_line"></i></span>
                     <span class="menu-text font-bold">   تقارير المال </span>

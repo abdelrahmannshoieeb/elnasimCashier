@@ -169,7 +169,6 @@ class AddInvoice extends Component
 
         $customer = Customer::find($customerId);
         $this->searchCustomer = $customer->name; // Update the search term to customer name
-        $this->bg = " bg-green ";
 
         // Update the $showButtons property based on customer balance
         if ($customer->balance < 0) {
@@ -177,6 +176,11 @@ class AddInvoice extends Component
         } else {
             $this->showButtons = true;
         }
+        // if ( !$customerId) {
+        //     $this->showButtons = false;
+        // }else{
+        //     $this->showButtons = true;
+        // }
     }
 
 
@@ -217,6 +221,11 @@ class AddInvoice extends Component
     public function updatedSearchCustomer()
     {
         $this->customers = Customer::where('name', 'like', '%' . $this->searchCustomer . '%')->get();
+    
+        if ($this->customers->count() == 1) {
+            // Automatically select the single customer's ID
+            $this->selectedCustomerId = $this->customers->first()->id;
+        }
     }
     public function saveInvoice()
     {

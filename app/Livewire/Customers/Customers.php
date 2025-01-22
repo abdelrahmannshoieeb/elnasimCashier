@@ -12,7 +12,7 @@ class Customers extends Component
 
     public function mount()
     {
-        $this->customers = Customer::all();
+        $this->customers = Customer::all()->reverse();
     }
     public function delete($id)
     {
@@ -23,7 +23,7 @@ class Customers extends Component
         }
     
         // Refresh the customers list
-        $this->customers = Customer::all();
+        $this->customers = Customer::all()->reverse();
     }
 
     public function updatedSearch()
@@ -33,7 +33,7 @@ class Customers extends Component
 
     public function viewAll() {
 
-        $this->customers = Customer::all();
+        $this->customers = Customer::all()->reverse();
     }
 
     public function forhim() {
