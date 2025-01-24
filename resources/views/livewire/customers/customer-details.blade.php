@@ -13,70 +13,36 @@ return str_replace(range(0, 9), $arabicDigits, $number);
 
 <div>
 
-<h1 class="text-center" style="font-size: 30px; margin_top: 20px">سندات العميل</h1>
+    <h1 class="text-center" style="font-size: 30px; margin_top: 20px">سندات العميل</h1>
     <div class="overflow-x-auto">
         <div class="min-w-full inline-block align-middle">
             <div class="border rounded-lg divide-y divide-gray-200 dark:border-gray-700 dark:divide-gray-700">
                 <div class="py-3 px-4 d-flex">
-                    <div class="relative max-w-l flex items-center">
-                        <input
-                            type="text"
-                            name="table-with-pagination-search"
-                            id="table-with-pagination-search"
-                            class="form-input ps-11 font-bold"
-                            placeholder="ابحث باسم العميل"
-                            wire:model="search">
-    
-                        <button type="button" wire:click="thesearch" class="btn bg-info text-white" style="margin:10px">ابحث</button>
-                        <button type="button" wire:click="viewAll" class="btn bg-dark text-white" style="margin:10px"> الكل</button>
-                        <div style="width: 230px;" x-data="{ open: false }" class="relative">
-                            <button @click="open = !open" type="button" class="py-2 px-3 inline-flex bg-success text-white justify-center items-center text-sm gap-2 rounded-md font-medium shadow-sm align-middle transition-all">
-                                فلتر حسب نوع السند <i class="mgc_down_line text-base"></i>
-                            </button>
-    
-                            <div x-show="open" @click.outside="open = false" class="absolute mt-2 z-50 bg-white border shadow-md rounded-lg p-2 dark:bg-slate-800 dark:border-slate-700 transition-all duration-300">
-                                <a wire:click="forhim; open = false"
-                                    class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
-                                    سندات الاضافة
-                                </a>
-                                <a wire:click="onhim; open = false"
-                                    class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
-                                    سندات السحب
-                                </a>
-                                <a wire:click="empty; open = false"
-                                    class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
-                                    الكل
-                                </a>
-                            </div>
+                    <div style="width: 300px;" x-data="{ open: false }" class="relative">
+                        <button @click="open = !open" type="button" class="py-2 px-3 inline-flex bg-success text-white justify-center items-center text-sm gap-2 rounded-md font-medium shadow-sm align-middle transition-all">
+                            فلتر حسب الفترة <i class="mgc_down_line text-base"></i>
+                        </button>
+
+                        <div x-show="open" @click.outside="open = false" class="absolute mt-2 z-50 bg-white border shadow-md rounded-lg p-2 dark:bg-slate-800 dark:border-slate-700 transition-all duration-300">
+                            <a wire:click="bondfilterBy('day')" class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
+                                خلال اليوم
+                            </a>
+                            <a wire:click="bondfilterBy('week')" class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
+                                خلال أسبوع
+                            </a>
+                            <a wire:click="bondfilterBy('month')" class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
+                                خلال شهر
+                            </a>
+                            <a wire:click="bondfilterBy('year')" class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
+                                خلال سنة
+                            </a>
                         </div>
-                        <div style="width: 230px;" x-data="{ open: false }" class="relative">
-                            <button @click="open = !open" type="button" class="py-2 px-3 inline-flex bg-success text-white justify-center items-center text-sm gap-2 rounded-md font-medium shadow-sm align-middle transition-all">
-                                فلتر حسب طريقة الدفع <i class="mgc_down_line text-base"></i>
-                            </button>
-    
-                            <div x-show="open" @click.outside="open = false" class="absolute mt-2 z-50 bg-white border shadow-md rounded-lg p-2 dark:bg-slate-800 dark:border-slate-700 transition-all duration-300">
-                                <a wire:click="cheque; open = false"
-                                    class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
-                                    شيك
-                                </a>
-                                <a wire:click="credit; open = false"
-                                    class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
-                                    كريدت
-                                </a>
-                                <a wire:click="cash; open = false"
-                                    class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
-                                    نقدي
-                                </a>
-                            </div>
-                        </div>
-    
                     </div>
-    
                 </div>
-    
+
                 <div class="overflow-x-auto">
                     <div class="overflow-hidden">
-                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 class=" overflow-x-auto"">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 class=" style="min-height: 200px;" overflow-x-auto"">
                             <thead class="bg-gray-50 dark:bg-gray-700">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase text-center" style="font-size: larger; font-weight: bolder">معرف السند</th>
@@ -88,7 +54,7 @@ return str_replace(range(0, 9), $arabicDigits, $number);
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase text-center" style="font-size: larger; font-weight: bolder">الرصيد</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase text-center" style="font-size: larger; font-weight: bolder">تاريخ السند</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase text-center" style="font-size: larger; font-weight: bolder">العمليات</th>
-    
+
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 dark:divide-gray-700 overflow-x-auto  style=" width: 99%;>
@@ -117,21 +83,21 @@ return str_replace(range(0, 9), $arabicDigits, $number);
                                     @endif
                                     @if ($customersBond->method == 'cash')
                                     <td class="px-6 py-4 whitespace-nowrap text-boldtext-gray-800 dark:text-gray-200 text-center" style="font-size: larger; font-weight: bolder;">
-                                        <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full font-medium bg-red-500 text-white text-bold">كاش</span>
+                                        <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full font-medium bg-red-500 text-white text-bold">نقدي</span>
                                     </td>
                                     @elseif($customersBond->method == 'credit')
                                     <td class="px-6 py-4 whitespace-nowrap text-bold text-gray-800 dark:text-gray-200 text-center" style="font-size: larger; font-weight: bolder;">
-                                        <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full font-medium bg-green-500 text-white text-bold">كريدت</span>
+                                        <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full font-medium bg-green-500 text-white text-bold">اجل</span>
                                     </td>
                                     @else
                                     <td class="px-6 py-4 whitespace-nowrap text-boldtext-gray-800 dark:text-gray-200 text-center" style="font-size: larger; font-weight: bolder;">
-                                        <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full font-medium bg-primary -500 text-white text-bold">شيك</span>
+                                        <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full font-medium bg-primary -500 text-white text-bold">دفعات</span>
                                     </td>
-    
+
                                     @endif
-    
-    
-    
+
+
+
                                     <td class="px-6 py-4 whitespace-nowrap text-bold text-gray-800 dark:text-gray-200 text-center" style="font-size: larger; font-weight: bolder">
                                         <li> <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">{{ $customersBond->customer->balance }}</span> </li>
                                     </td>
@@ -141,7 +107,7 @@ return str_replace(range(0, 9), $arabicDigits, $number);
                                             <p style="float: left;">
                                                 {{ convertToArabicDigits($customersBond->created_at->addHours(2)->format('h:i')) }}
                                                 {{ $customersBond->created_at->format('A') === 'AM' ? 'صباحا' : 'مساء' }}
-                                            </ح>
+                                                </ح>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-end text-bold font-medium">
@@ -168,7 +134,7 @@ return str_replace(range(0, 9), $arabicDigits, $number);
                                                 </div>
                                             </div>
                                         </div>
-                                        <a  href="{{ route('customerBondPrint', $customersBond->id) }}" type="button" class="text-info  hover:text-sky-700 mt-5 "  type="button" style="font-size: larger; font-weight: bolder;">اطبع فاتورة سند</ش><br>
+                                        <a href="{{ route('customerBondPrint', $customersBond->id) }}" type="button" class="text-info  hover:text-sky-700 mt-5 " type="button" style="font-size: larger; font-weight: bolder;">اطبع فاتورة سند</ش><br>
 
                                     </td>
                                 </tr>
@@ -177,67 +143,43 @@ return str_replace(range(0, 9), $arabicDigits, $number);
                         </table>
                     </div>
                 </div>
-    
+
             </div>
         </div>
     </div>
-    
-<h1 class="text-center" style="font-size: 30px; margin_top: 20px">فواتير العميل</h1>
+
+    <h1 class="text-center" style="font-size: 30px; margin_top: 20px">فواتير العميل</h1>
 
     <div class="overflow-x-auto" style="width: 99%;">
         <div class="min-w-full inline-block align-middle">
             <div class="border rounded-lg divide-y divide-gray-200 dark:border-gray-700 dark:divide-gray-700">
                 <div class="py-3 px-4 d-flex">
-                    <div class="relative max-w-l flex items-center">
-                        <input
-                            type="text"
-                            name="table-with-pagination-search"
-                            id="table-with-pagination-search"
-                            class="form-input ps-11 font-bold"
-                            placeholder="ابحث عن الفواتير الخاصة بعميل باسم العميل"
-                            wire:model="customerName">
-    
-                        <button type="button" wire:click="searchByCustomer" class="btn bg-info text-white" style="margin:10px">ابحث</button>
-                        <button type="button" wire:click="viewAll" class="btn bg-dark text-white" style="margin:10px"> الكل</button>
-                    </div>
-                    <div class="relative max-w-l flex items-center">
-                        <input
-                            type="text"
-                            name="table-with-pagination-search"
-                            id="table-with-pagination-search"
-                            class="form-input ps-11 font-bold"
-                            placeholder="ابحث عن الفواتير بمعرف الفاتورة"
-                            wire:model="invoiceId">
-    
-                        <button type="button" wire:click="searchByInvoice" class="btn bg-info text-white" style="margin:10px">ابحث</button>
-                        <button type="button" wire:click="viewAll" class="btn bg-dark text-white" style="margin:10px"> الكل</button>
-                    </div>
                     <div style="width: 300px;" x-data="{ open: false }" class="relative">
-                    <button @click="open = !open" type="button" class="py-2 px-3 inline-flex bg-success text-white justify-center items-center text-sm gap-2 rounded-md font-medium shadow-sm align-middle transition-all">
-                        فلتر حسب الفترة <i class="mgc_down_line text-base"></i>
-                    </button>
+                        <button @click="open = !open" type="button" class="py-2 px-3 inline-flex bg-success text-white justify-center items-center text-sm gap-2 rounded-md font-medium shadow-sm align-middle transition-all">
+                            فلتر حسب الفترة <i class="mgc_down_line text-base"></i>
+                        </button>
 
-                    <div x-show="open" @click.outside="open = false" class="absolute mt-2 z-50 bg-white border shadow-md rounded-lg p-2 dark:bg-slate-800 dark:border-slate-700 transition-all duration-300">
-                        <a wire:click="filterBy('day')" class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
-                            خلال اليوم
-                        </a>
-                        <a wire:click="filterBy('week')" class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
-                            خلال أسبوع
-                        </a>
-                        <a wire:click="filterBy('month')" class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
-                            خلال شهر
-                        </a>
-                        <a wire:click="filterBy('year')" class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
-                            خلال سنة
-                        </a>
+                        <div x-show="open" @click.outside="open = false" class="absolute mt-2 z-50 bg-white border shadow-md rounded-lg p-2 dark:bg-slate-800 dark:border-slate-700 transition-all duration-300">
+                            <a wire:click="filterBy('day')" class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
+                                خلال اليوم
+                            </a>
+                            <a wire:click="filterBy('week')" class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
+                                خلال أسبوع
+                            </a>
+                            <a wire:click="filterBy('month')" class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
+                                خلال شهر
+                            </a>
+                            <a wire:click="filterBy('year')" class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="#">
+                                خلال سنة
+                            </a>
+                        </div>
                     </div>
+
                 </div>
-    
-                </div>
-    
-    
+
+
                 <div class="overflow-hidden">
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700" style="min-height: 200px;">
                         <thead class="bg-gray-50 dark:bg-gray-700">
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase   text-center" style="font-size: larger; font-weight: bolder">معرف التصنيف</th>
@@ -277,10 +219,10 @@ return str_replace(range(0, 9), $arabicDigits, $number);
                                         </li>
                                         @endforeach
                                     </ul>
-    
-    
+
+
                                 </td>
-    
+
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200   text-center">
                                     <ul>
                                         <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-black text-white">
@@ -288,15 +230,21 @@ return str_replace(range(0, 9), $arabicDigits, $number);
                                         </span>
                                     </ul>
                                 </td>
-    
+
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200   text-center">
                                     <ul>
                                         <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-danger text-white">
-                                            <li style="font-size: larger;"> {{ $invoice->payMethod }} </li>
+                                            @if ($invoice->payMethod == 'cash')
+                                            <li style="font-size: larger;"> نقدي </li>
+                                            @elseif ($invoice->payMethod == 'credit')
+                                            <li style="font-size: larger;"> اجل </li>
+                                            @else
+                                            <li style="font-size: larger;"> دفعات </li>
+                                            @endif
                                         </span>
                                     </ul>
                                 </td>
-    
+
                                 @if ($invoice->discount)
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200   text-center" style="font-size: larger; font-weight: bolder">
                                     <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -317,7 +265,7 @@ return str_replace(range(0, 9), $arabicDigits, $number);
                                     <a href="{{ route('customers') }}" title="اذهب لجدول العملاء" style="text-decoration: underline;">عميل دائم
                                         <span class="mgc_arrow_right_up_fill text-base text-primary"></span>
                                     </a>
-    
+
                                 </td>
                                 @else
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200   text-center" style="font-size: larger; font-weight: bolder">عميل غير دائم</td>
@@ -327,15 +275,16 @@ return str_replace(range(0, 9), $arabicDigits, $number);
                                 @else
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200   text-center" style="font-size: larger; font-weight: bolder"> {{$invoice->user->name}}</td>
                                 @endif
+                                
                                 <td class="px-6 py-4 whitespace-nowrap text-bold text-gray-800 dark:text-gray-200 text-center" style="font-size: larger; font-weight: bolder">
-                                        <div class="invoice-header" style="text-align: right;">
-                                            <span>التاريخ: {{ convertToArabicDigits($customersBond->created_at->format('y-m-d')) }}</span>
-                                            <p style="float: left;">
-                                                {{ convertToArabicDigits($customersBond->created_at->addHours(2)->format('h:i')) }}
-                                                {{ $customersBond->created_at->format('A') === 'AM' ? 'صباحا' : 'مساء' }}
+                                    <div class="invoice-header" style="text-align: right;">
+                                        <span>التاريخ: {{ convertToArabicDigits($invoice->created_at->format('y-m-d')) }}</span>
+                                        <p style="float: left;">
+                                            {{ convertToArabicDigits($invoice->created_at->addHours(2)->format('h:i')) }}
+                                            {{ $invoice->created_at->format('A') === 'AM' ? 'صباحا' : 'مساء' }}
                                             </ح>
-                                        </div>
-                                    </td>
+                                    </div>
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                                     <button type="button" class="text-danger hover:text-sky-700 mt-5 " data-fc-target="default-modal" data-fc-type="modal" type="button" style="font-size: larger; font-weight: bolder;">مسح</button><br>
                                     <div id="default-modal" class="w-full h-full mt-5 fixed top-0 left-0 z-50 transition-all duration-500 fc-modal hidden">

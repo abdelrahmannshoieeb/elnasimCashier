@@ -27,7 +27,7 @@
                                 @foreach ($customers as $customer )
                                 <li wire:click="selectedCustomer({{ $customer->id }})" style="cursor: pointer;"
                                     class="inline-flex items-center gap-x-2 py-2.5 px-4 text-sm font-medium bg-white border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white">
-                                    {{ $customer->name }} ({{ $customer->balance }})
+                                    {{ $customer->name }} (<span wire:poll.500ms>{{ $customer->balance }}</span>)
                                 </li>
                                 @endforeach
                             </ul>
@@ -37,15 +37,61 @@
                 </div>
                 @if ($showButtons)
                 <br>
+
+                @if ($searchCustomer && $customers->isNotEmpty())
+                <div class="grid md:grid-cols-4 xs:grid-cols-4 gap-3 mb-6 w-full">
+                    <div>
+                        <div class="flex flex-col gap-2">
+                            <div class="form-check">
+                                <input wire:model="type" value="1"
+                                    type="radio" class="form-radio text-primary" name="formRadio1" id="formRadio1_01" checked>
+                                <label class="ms-1.5" for="formRadio1_01">له</label>
+                            </div>
+                            <div class="form-check">
+                                <input wire:model="type" value="0"
+                                    type="radio" class="form-radio text-primary" name="formRadio1" id="formRadio1_02">
+                                <label class="ms-1.5" for="formRadio1_02">عليه</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="simpleinput" class="text-gray-800 text-sm font-medium inline-block mb-2">المبلغ</label>
+                        <input wire:model="amount" type="number" id="simpleinput" class="form-input">
+                    </div>
+                    <div>
+                        <label for="simpleinput" class="text-gray-800 text-sm font-medium inline-block mb-2">ملاحظات</label>
+                        <input wire:model="note" type="text" id="simpleinput" class="form-input">
+                    </div>
+                    <div>
+                        <label for="select-label" class="mb-2 block" style="font-weight:600;">طريقة تنفيذ العملية</label>
+                        <select id="select-label" class="form-select" wire:model="method">
+                            <option>اختر الطريقة</option>
+                            <option value="cash">نقدي</option>
+                            <option value="credit"> اجل</option>
+                            <option value="cheque">دفعات</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button wire:click="create" style="  font-size: 18px;" type="button" class="btn bg-success text-white rounded-full">تنفيذ</button>
+                    </div>
+                </div>
+                @if (session()->has('addsuccess'))
+                <div class="bg-success/25 text-success text-center text-xl rounded-md p-4 mt-5" role="alert" style="width: 75%;">
+                    <span class="font-bold text-lg"></span> {{ session('addsuccess') }}
+                </div>
+                @endif
+                @if (session()->has('subtractmessage'))
+                <div class="bg-success/25 text-success text-center text-xl rounded-md p-4 mt-5" role="alert" style="width: 75%;">
+                    <span class="font-bold text-lg"></span> {{ session('subtractmessage') }}
+                </div>
+                @endif
+                @if (session()->has('subtractmessagefailed'))
+                <div class="bg-danger/25 text-danger text-center text-xl rounded-md p-4 mt-5" role="alert" style="width: 75%;">
+                    <span class="font-bold text-lg"></span> {{ session('subtractmessagefailed') }}
+                </div>
+                @endif
+                @endif
                 <div class="grid md:grid-cols-4 gap-3 mb-6 w-full">
-                    <div>
-                        <label class="text-gray-800 text-sm font-medium mb-2 block">المبلغ المدفوع</label>
-                        <input type="number" class="form-input" wire:model="payedAmount" placeholder="{{ $payedAmount }}">
-                    </div>
-                    <div>
-                        <label class="text-gray-800 text-sm font-medium mb-2 block">ملاحظات</label>
-                        <textarea type="text" class="form-input" wire:model="notes"> </textarea>
-                    </div>
                     <div>
                         <label class="text-gray-800 text-sm font-medium mb-2 block">خصم</label>
                         <input type="number" class="form-input" wire:model="discount">
@@ -181,7 +227,7 @@
                     <div>
                         <div class="flex">
                             <input class="form-switch" type="checkbox" id="flexSwitchCheck" wire:click="toggleSellPrice">
-                            <label class="ms-1.5" for="flexSwitchCheck">   {{ $sell_price_type === 1 ? 'من المخزن' : 'يدوي' }}</label>
+                            <label class="ms-1.5" for="flexSwitchCheck"> {{ $sell_price_type === 1 ? 'من المخزن' : 'يدوي' }}</label>
                         </div>
                         @if ($sell_price_type === 1)
                         <label class="text-gray-800 text-sm font-medium mb-2 block">اختر السعر</label>

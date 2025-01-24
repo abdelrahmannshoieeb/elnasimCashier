@@ -38,52 +38,26 @@ class CustomerDetails extends Component
         $this->customersBonds = CustomerBonnd::all();
     }
 
-    public function thesearch()
+    public function updatedSearch()
     {
-        $searchTerm = $this->search;
-        $this->customersBonds = CustomerBonnd::whereHas('customer', function ($query) use ($searchTerm) {
-            $query->where('name', 'LIKE', '%' . $searchTerm . '%')
-            ;
-        })->get();
-       
+        // dd($this->search);
+        $searchTerm = trim($this->search);
+    
+        if (!empty($searchTerm)) {
+            $this->customersBonds = CustomerBonnd::whereHas('customer', function ($query) use ($searchTerm) {
+                $query->where('name', 'LIKE', '%' . $searchTerm . '%');
+            })->get();
+        } else {
+            $this->customersBonds = collect(); // Return an empty collection when no search term is provided
+        }
     }
+    
 
     public function viewAll() {
 
         $this->customersBonds = CustomerBonnd::where('customer_id', $this->customer_id)->get();
     }
 
-    public function forhim() {
-        $this->customersBonds = CustomerBonnd::where('type', 'add')
-        ->where('customer_id', $this->customer_id)
-        ->get();
-    }
-    public function onhim() {
-        $this->customersBonds = CustomerBonnd::where('type', 'subtract')
-        ->where('customer_id', $this->customer_id)
-        ->get();
-    }
-    public function empty() {
-        $this->customersBonds = CustomerBonnd::where('customer_id', $this->customer_id)->get();
-    }
-    public function cheque() {
-        $this->customersBonds = CustomerBonnd::where('method', 'cheque')
-        ->where('customer_id', $this->customer_id)
-        
-        ->get();
-    }
-    public function credit() {
-        $this->customersBonds = CustomerBonnd::where('method', 'credit')
-        ->where('customer_id', $this->customer_id)
-        
-        ->get();
-    }
-    public function cash() {
-        $this->customersBonds = CustomerBonnd::where('method', 'cash')
-        ->where('customer_id', $this->customer_id)
-        
-        ->get();
-    }
 
 
 
@@ -92,15 +66,31 @@ class CustomerDetails extends Component
         $this->updateTotals($filter);
     }
     
+    public function bondfilterBy($filter)
+    {
+        $this->bondupdateTotals($filter);
+    }
+    
+    private function bondupdateTotals($filter)
+    {
+        $dateFilter = match ($filter) {
+            'day' => now()->startOfDay(),
+            'week' => now()->subDays(now()->dayOfWeek - 1), // Week from today
+            'month' => now()->subDays(now()->day - 1), // Month from today
+            'year' => now()->subDays(now()->dayOfYear - 1)->startOfDay(), // Year from today
+        default => now()->startOfDay(),// Default to today(),
+        };
+
+        $this->customersBonds = CustomerBonnd::where('created_at', '>=', $dateFilter)
+        ->where('customer_id', $this->customer_id)
+        ->get();
+    }
     private function updateTotals($filter)
     {
-        
-     
-      
         $dateFilter = match ($filter) {
-            'day' => dd(now()->startOfDay()),
-            'week' => dd(now()->subDays(now()->dayOfWeek - 1)), // Week from today
-            'month' => dd(now()->subDays(now()->day - 1)), // Month from today
+            'day' => now()->startOfDay(),
+            'week' => now()->subDays(now()->dayOfWeek - 1), // Week from today
+            'month' => now()->subDays(now()->day - 1), // Month from today
             'year' => now()->subDays(now()->dayOfYear - 1)->startOfDay(), // Year from today
         default => now()->startOfDay(),// Default to today(),
         };
@@ -108,8 +98,6 @@ class CustomerDetails extends Component
         $this->invoices = Invoice::where('created_at', '>=', $dateFilter)
         ->where('customer_id', $this->customer_id)
         ->get();
-    
-       
     }
     public function render()
     {
