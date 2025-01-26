@@ -196,6 +196,14 @@ return str_replace(range(0, 9), $arabicDigits, $number);
     </div>
     @endif
 
+    <div style=" width: 100%;">
+        <div style="display: flex; justify-content: space-between; align-items: center;  margin: 2px 0;">
+            <span style="text-align: left; flex: 1;">{{ convertToArabicDigits($invoice->total) }}</span>
+            <span style="margin: 0 10px; flex: 1;"></span>
+            <span style="text-align: right; flex: 1;">فاتورة اليوم</span>
+        </div>
+    </div>
+    
     @if ($invoice->customer && $invoice->payedAmount < $invoice->total )
     <div style="display: flex; justify-content: space-between; align-items: center; margin: 2px 0;">
         <span style="text-align: left; flex: 1;"> - {{ convertToArabicDigits(abs($invoice->customer->balance + $invoice->total - $invoice->payedAmount)) }}</span>
@@ -215,6 +223,16 @@ return str_replace(range(0, 9), $arabicDigits, $number);
         <span style="text-align: right; flex: 1; width: 100%;">حساب قديم</span>
     </div>
     @endif
+    
+    @if ($invoice->customer)
+    <div style=" width: 100%;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 2px 0;">
+            <span style="text-align: left; flex: 1;">{{ convertToArabicDigits($invoice->customer->balance) }}</span>
+            <span style="margin: 0 20px; flex: 1;"></span>
+            <span style="text-align: right; flex: 1;"> باقي</span>
+        </div>
+    </div>
+    @endif
     @if ($invoice->discount)
     <div style=" width: 100%;">
         <div style="display: flex; justify-content: space-between; align-items: center;  margin: 2px 0;">
@@ -225,13 +243,7 @@ return str_replace(range(0, 9), $arabicDigits, $number);
     </div>
     @endif
 
-    <div style=" width: 100%;">
-        <div style="display: flex; justify-content: space-between; align-items: center;  margin: 2px 0;">
-            <span style="text-align: left; flex: 1;">{{ convertToArabicDigits($invoice->total) }}</span>
-            <span style="margin: 0 10px; flex: 1;"></span>
-            <span style="text-align: right; flex: 1;">فاتورة اليوم</span>
-        </div>
-    </div>
+  
 
     <div style=" width: 100%;">
         <div style="display: flex; justify-content: space-between; align-items: center;  margin: 2px 0;">
@@ -241,15 +253,6 @@ return str_replace(range(0, 9), $arabicDigits, $number);
         </div>
     </div>
 
-    @if ($invoice->customer)
-    <div style=" width: 100%;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin: 2px 0;">
-            <span style="text-align: left; flex: 1;">{{ convertToArabicDigits($invoice->customer->balance) }}</span>
-            <span style="margin: 0 20px; flex: 1;"></span>
-            <span style="text-align: right; flex: 1;"> باقي</span>
-        </div>
-    </div>
-    @endif
 
 
 
